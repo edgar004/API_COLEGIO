@@ -2,7 +2,7 @@ const express = require('express');
 
 const config = require('./server/config');
 
-// require('./database');
+require('./database/database');
 
 const app = config(express());
 
