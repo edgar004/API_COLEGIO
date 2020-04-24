@@ -1,7 +1,7 @@
-const materia_modelo = require('../modelos/materia');
+const horario_modelo = require('../modelos/horario');
 const ctrls = {}
 
-ctrls.getMaterias = async (req, res) => {
+ctrls.getHorarios = async (req, res) => {
     try {
 
         const filtro = {};
@@ -12,11 +12,11 @@ ctrls.getMaterias = async (req, res) => {
             }
         }
 
-        const materias = await materia_modelo.find(filtro).sort({
+        const Horario = await horario_modelo.find(filtro).sort({
             _id: -1
         });
         res.json({
-            results: materias
+            results: Horario
         });
     } catch (error) {
         res.status(500).json(error);
@@ -24,10 +24,10 @@ ctrls.getMaterias = async (req, res) => {
 }
 
 
-ctrls.addMaterias = async (req, res) => {
+ctrls.addHorario = async (req, res) => {
     try {
-        const materias = new materia_modelo(req.body);
-        await materias.save();
+        const Horario = new horario_modelo(req.body);
+        await Horario.save();
         res.json({
             ok: true
         });
@@ -36,12 +36,12 @@ ctrls.addMaterias = async (req, res) => {
     }
 }
 
-ctrls.UpdateMaterias = async (req, res) => {
+ctrls.UpdateHorario = async (req, res) => {
     try {
         const {
             id
         } = req.params;
-        await materia_modelo.findByIdAndUpdate(id, req.body);
+        await horario_modelo.findByIdAndUpdate(id, req.body);
         res.json({
             ok: true
         });

@@ -4,29 +4,21 @@ const {
 } = require('mongoose');
 
 var estudianteSchema = new Schema({
-    nombre_completo: {
+    nombreCompleto: {
         type: String,
         required: true
     },
-    nombre_padre: {
+    grado: {
         type: String,
         required: true
     },
-    nombre_madre: {
-        type: String,
-        required: true
-    },
-    edad: {
-        type: Number,
-        required: true
-    },
-    fecha_nacimiento: {
+    fechaNacimiento: {
         type: Date,
         default: new Date(),
         required: true
     },
 }, {
-    collection: "estudiante"
+    collection: "estudiantes"
 })
 
 module.exports = model('estudiante', estudianteSchema);
