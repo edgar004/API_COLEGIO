@@ -5,7 +5,6 @@ ctrls.getEstudiantes = async (req, res) => {
 
     try {
         const filtro = {};
-        console.log(req.params);
 
         if (req.query.nombre) {
             filtro = {

@@ -18,8 +18,9 @@ var HorarioSchema = new Schema({
         required: true
     },
     dia_semana: {
-        type: Number,
-        required: true
+        type: String,
+        required: false,
+        default: "Lunes"
     },
     id_aula: {
         type: Schema.Types.ObjectId,

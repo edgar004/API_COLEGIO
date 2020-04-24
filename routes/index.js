@@ -18,19 +18,19 @@ module.exports = app => {
     router.put('/UpdateEstudiante/:id', estudiante.UpdateEstudiantes);
 
     //Materia
-    router.get('/getMaterias:nombre?', Materia.getMaterias);
+    router.get('/getMaterias/:nombre?', Materia.getMaterias);
     router.post('/addMateria', Materia.addMaterias);
     router.put('/UpdateMateria/:id', Materia.UpdateMaterias);
 
 
     //Aula
-    router.get('/getAulas:nombre?', Aula.getAulas);
+    router.get('/getAulas/:nombre?', Aula.getAulas);
     router.post('/addAula', Aula.addAulas);
     router.put('/UpdateAula/:id', Aula.UpdateAulas);
 
 
     //Horario
-    router.get('/getHorarios:nombre?', Horario.getHorarios);
+    router.get('/getHorarios/:nombre?', Horario.getHorarios);
     router.post('/addHorario', Horario.addHorario);
     router.put('/UpdateHorario/:id', Horario.UpdateHorario);
 
