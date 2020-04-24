@@ -32,6 +32,11 @@ var HorarioSchema = new Schema({
         ref: 'materia',
         required: true
     },
+    estudiantes_inscripto: [{
+        type: Schema.Types.ObjectId,
+        ref: 'estudiante',
+        required: false
+    }]
 }, {
     collection: "horarios"
 });

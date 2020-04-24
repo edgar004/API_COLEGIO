@@ -5,7 +5,6 @@ ctrls.getMaterias = async (req, res) => {
     try {
 
         const filtro = {};
-        console.log(req.query.nombre);
 
         if (req.query.nombre) {
             filtro = {
@@ -16,7 +15,6 @@ ctrls.getMaterias = async (req, res) => {
         const materias = await materia_modelo.find(filtro).sort({
             _id: -1
         });
-        console.log(materias);
 
         res.json({
             results: materias

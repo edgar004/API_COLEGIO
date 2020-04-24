@@ -1,5 +1,6 @@
 const horario_modelo = require('../modelos/horario');
 const materia_modelo = require('../modelos/materia');
+const estudiante_modelo = require('../modelos/estudiante');
 const aula = require('../modelos/aula');
 
 const ctrls = {}
@@ -15,7 +16,9 @@ ctrls.getHorarios = async (req, res) => {
             }
         }
 
-        const Horario = await horario_modelo.find(filtro).sort({
+        const Horario = await horario_modelo.find(filtro, {
+            estudiantes_inscripto: 0
+        }).sort({
             _id: -1
         }).populate("id_materia", "nombre").populate("id_aula", "nombre")
 
@@ -28,17 +31,71 @@ ctrls.getHorarios = async (req, res) => {
                 horario_final: h.horario_final,
                 id_materia: h.id_materia.nombre,
                 id_aula: h.id_aula.nombre,
+                id: h._id
             })
         }
 
+        console.log(horarioInfo);
 
         res.json({
             results: horarioInfo
         });
     } catch (error) {
+        console.log(error);
+
         res.status(500).json(error);
     }
 }
+
+
+ctrls.getEstudiantesHorarios = async (req, res) => {
+
+    try {
+
+        const filtro = {};
+
+        if (req.query.nombre) {
+            filtro = {
+                nombre: req.query.nombre
+            }
+        }
+        const estudiantes = await estudiante_modelo.find(filtro).sort({
+            _id: -1
+        });
+
+
+        console.log(req.params);
+
+        const horarios = await horario_modelo.findById(req.params.id_horario).sort({
+            _id: -1
+        });
+
+
+        let estudianteArray = []
+        for (let estudiante of estudiantes) {
+            let inscripto = false;
+            for (let horarioEstudiante of horarios.estudiantes_inscripto) {
+                if (estudiante._id == horarioEstudiante) {
+                    inscripto = true;
+                    break;
+                }
+            }
+
+            estudianteArray.push({
+                nombre: estudiante.nombreCompleto,
+                grado: estudiante.grado,
+                inscripto: inscripto ? "INSCRIPTO" : "INSCRIBIR"
+            });
+        }
+
+        res.json({
+            results: estudianteArray
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
 
 
 ctrls.addHorario = async (req, res) => {

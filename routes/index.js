@@ -31,6 +31,7 @@ module.exports = app => {
 
     //Horario
     router.get('/getHorarios/:nombre?', Horario.getHorarios);
+    router.get('/getHorariosEstudiante/inscriptos/:id_horario?', Horario.getEstudiantesHorarios);
     router.post('/addHorario', Horario.addHorario);
     router.put('/UpdateHorario/:id', Horario.UpdateHorario);
 

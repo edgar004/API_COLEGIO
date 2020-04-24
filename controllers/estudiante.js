@@ -14,13 +14,10 @@ ctrls.getEstudiantes = async (req, res) => {
         const estudiantes = await estudiante_modelo.find(filtro).sort({
             _id: -1
         });
-        console.log(estudiantes)
         res.json({
             results: estudiantes
         });
     } catch (error) {
-        console.log(error);
-
         res.status(500).json(error);
     }
 }
@@ -43,16 +40,12 @@ ctrls.getEstudiante = async (req, res) => {
 
 ctrls.addEstudiantes = async (req, res) => {
     try {
-        console.log(req.body);
-
         const estudiante = new estudiante_modelo(req.body);
         await estudiante.save();
         res.json({
             ok: true
         });
     } catch (error) {
-        console.log(error);
-
         res.status(500).json(error);
     }
 }
